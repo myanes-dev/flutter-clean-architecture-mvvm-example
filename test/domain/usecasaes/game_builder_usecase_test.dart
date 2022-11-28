@@ -25,7 +25,8 @@ void main() {
 
   test('should crete a game with 2 rounds', () async {
     when(_breedListUsecase.call()).thenAnswer(
-      (realInvocation) async => Result(true, value: BreedData.validBreedList()),
+      (realInvocation) async =>
+          Result(true, value: BreedTestData.validBreedList()),
     );
     when(
       _dogRandomBreedUsecase.call(
@@ -56,7 +57,8 @@ void main() {
 
   test('should return error when randomDog has errors', () async {
     when(_breedListUsecase.call()).thenAnswer(
-      (realInvocation) async => Result(true, value: BreedData.validBreedList()),
+      (realInvocation) async =>
+          Result(true, value: BreedTestData.validBreedList()),
     );
     when(
       _dogRandomBreedUsecase.call(
