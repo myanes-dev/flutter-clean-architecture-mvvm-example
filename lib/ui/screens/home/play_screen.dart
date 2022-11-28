@@ -16,7 +16,7 @@ class PlayScreen extends StatelessWidget {
     final themeData = context.theme;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('🐶 Dogs Care 🐶'),
+        title: const Text('🐶 Dogs Games 🐶'),
         centerTitle: true,
         elevation: 0,
         backgroundColor: themeData.colorScheme.background,
@@ -35,43 +35,49 @@ class PlayScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                 horizontal: Dimens.MARGIN_S,
               ),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.network(
-                        round.dog.imageUrl,
-                        fit: BoxFit.cover,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Dimens.MARGIN_S,
+                ),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.network(
+                          round.dog.imageUrl,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: Dimens.MARGIN_M),
-                  const Text(
-                    'What its breed?',
-                    style: TextStyle(
-                      fontSize: 20,
+                    const SizedBox(height: Dimens.MARGIN_L),
+                    const Text(
+                      'What its breed?',
+                      style: TextStyle(
+                        fontSize: 26,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: Dimens.MARGIN_M),
-                  Expanded(
-                    child: AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 250),
-                      child: model.roundStatus == RoundStatus.PLAYING
-                          ? AnswerButtons(
-                              key: const Key('AnswerButtons_success'),
-                              round: round,
-                              onAnswer: model.onAnswer,
-                            )
-                          : AnswerButtons(
-                              key: const Key('AnswerButtons_error'),
-                              round: round,
-                              onAnswer: model.onAnswer,
-                              answer: model.currentRoundResult?.answer,
-                            ),
+                    const SizedBox(height: Dimens.MARGIN_M),
+                    Expanded(
+                      child: AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 250),
+                        child: model.roundStatus == RoundStatus.PLAYING
+                            ? AnswerButtons(
+                                key: const Key('AnswerButtons_success'),
+                                round: round,
+                                onAnswer: model.onAnswer,
+                              )
+                            : AnswerButtons(
+                                key: const Key('AnswerButtons_error'),
+                                round: round,
+                                onAnswer: model.onAnswer,
+                                answer: model.currentRoundResult?.answer,
+                              ),
+                      ),
                     ),
-                  ),
-                ],
+                    const SizedBox(height: Dimens.MARGIN_M),
+                  ],
+                ),
               ),
             );
           }

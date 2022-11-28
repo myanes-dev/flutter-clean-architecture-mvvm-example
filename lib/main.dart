@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Dogs Care',
+      title: 'Dogs Games',
       theme: AppThemes.light,
       darkTheme: AppThemes.dark,
       home: PlayScreen(),

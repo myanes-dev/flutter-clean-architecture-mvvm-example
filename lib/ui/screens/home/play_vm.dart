@@ -48,7 +48,7 @@ class PlayViewModel extends GetxController {
     );
     _roundStatus.value = RoundStatus.COMPLETED;
 
-    await Future.delayed(const Duration(milliseconds: 1000));
+    await Future.delayed(const Duration(milliseconds: 300));
     _isloading.value = true;
     if (_roundIndex.value + 1 == _rounds.length) {
       // TODO: navigate to finish screen
