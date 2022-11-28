@@ -5,13 +5,13 @@ import 'package:flutter_clean_architecture_2022/core/config/di.dart';
 import 'package:flutter_clean_architecture_2022/ui/const/themes.dart';
 
 void main() async {
-  await _init();
+  _init();
   runApp(const MyApp());
 }
 
-Future _init() async {
+void _init() {
   WidgetsFlutterBinding.ensureInitialized();
-  await initializeDI();
+  initializeDI();
 }
 
 class MyApp extends StatelessWidget {

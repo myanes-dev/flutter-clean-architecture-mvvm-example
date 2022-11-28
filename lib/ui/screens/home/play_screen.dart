@@ -54,7 +54,7 @@ class PlayScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: Dimens.MARGIN_L),
                     const Text(
-                      'This dog this is a...',
+                      'This dog is a...',
                       style: TextStyle(
                         fontSize: 26,
                       ),

@@ -60,11 +60,11 @@ class PlayViewModel extends GetxController {
 
   Future _createGame() async {
     final result = await gameCreatorUsecase(numOfRounds: 2);
-    if (result == null) {
+    if (!result.success) {
       // TODO: show error;
       return;
     }
-    _gameState.value = _gameState.value.copyWith(rounds: result);
+    _gameState.value = _gameState.value.copyWith(rounds: result.value);
   }
 
   void _nextRound() {
