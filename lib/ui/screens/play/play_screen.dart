@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture_2022/core/config/di.dart';
 import 'package:flutter_clean_architecture_2022/domain/models/round.dart';
 import 'package:flutter_clean_architecture_2022/ui/const/dimens.dart';
-import 'package:flutter_clean_architecture_2022/ui/screens/home/play_vm.dart';
+import 'package:flutter_clean_architecture_2022/ui/screens/play/play_vm.dart';
 import 'package:flutter_clean_architecture_2022/ui/widgets/answer_buttons.dart';
 import 'package:get/get.dart';
 

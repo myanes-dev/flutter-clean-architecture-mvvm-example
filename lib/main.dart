@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture_2022/ui/screens/home/play_screen.dart';
+import 'package:flutter_clean_architecture_2022/ui/screens/play/play_screen.dart';
 import 'package:get/get.dart';
 import 'package:flutter_clean_architecture_2022/core/config/di.dart';
 import 'package:flutter_clean_architecture_2022/ui/const/themes.dart';

@@ -4,7 +4,7 @@ import 'package:flutter_clean_architecture_2022/domain/repository/dog_repository
 import 'package:flutter_clean_architecture_2022/domain/usecasaes/breed_list_usecase.dart';
 import 'package:flutter_clean_architecture_2022/domain/usecasaes/dog_random_breed_usecase.dart';
 import 'package:flutter_clean_architecture_2022/domain/usecasaes/game_builder_usecase.dart';
-import 'package:flutter_clean_architecture_2022/ui/screens/home/play_vm.dart';
+import 'package:flutter_clean_architecture_2022/ui/screens/play/play_vm.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.I;

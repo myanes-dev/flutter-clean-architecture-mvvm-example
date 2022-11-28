@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture_2022/domain/models/round.dart';
 import 'package:flutter_clean_architecture_2022/ui/const/dimens.dart';
-import 'package:flutter_clean_architecture_2022/ui/screens/home/play_screen.dart';
+import 'package:flutter_clean_architecture_2022/ui/screens/play/play_screen.dart';
 import 'package:get/get.dart';
 
 class GameResultScreen extends StatelessWidget {

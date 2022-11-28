@@ -2,7 +2,7 @@ import 'package:flutter_clean_architecture_2022/domain/models/breed.dart';
 import 'package:flutter_clean_architecture_2022/domain/models/round.dart';
 import 'package:flutter_clean_architecture_2022/domain/usecasaes/game_builder_usecase.dart';
 import 'package:flutter_clean_architecture_2022/ui/screens/game_result/game_result_screen.dart';
-import 'package:flutter_clean_architecture_2022/ui/screens/home/game_state.dart';
+import 'package:flutter_clean_architecture_2022/ui/screens/play/game_state.dart';
 import 'package:get/get.dart';
 
 class PlayViewModel extends GetxController {
