@@ -17,6 +17,21 @@ class RoundResult {
     required this.round,
     required this.answer,
   });
+
+  bool get isSuccess {
+    return answer.name == round.dog.breed?.name;
+  }
+}
+
+extension GameResultsExtend on List<RoundResult> {
+  int get answersOKcount {
+    return fold(
+      0,
+      (previousValue, element) {
+        return element.isSuccess ? previousValue + 1 : previousValue;
+      },
+    );
+  }
 }
 
 enum RoundStatus {

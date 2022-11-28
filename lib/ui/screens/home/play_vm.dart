@@ -1,33 +1,21 @@
 import 'package:flutter_clean_architecture_2022/domain/models/breed.dart';
 import 'package:flutter_clean_architecture_2022/domain/models/round.dart';
 import 'package:flutter_clean_architecture_2022/domain/usecasaes/game_builder_usecase.dart';
+import 'package:flutter_clean_architecture_2022/ui/screens/game_result/game_result_screen.dart';
+import 'package:flutter_clean_architecture_2022/ui/screens/home/game_state.dart';
 import 'package:get/get.dart';
 
 class PlayViewModel extends GetxController {
   final GameCreatorUsecase gameCreatorUsecase;
 
-  final RxBool _isloading = true.obs;
-  bool get isLoading => _isloading.value;
-
-  final Rx<RoundStatus> _roundStatus = RoundStatus.PLAYING.obs;
-  RoundStatus get roundStatus => _roundStatus.value;
-
-  List<Round> _rounds = List<Round>.empty();
-  final List<RoundResult> _roundsResults = [];
-  final RxInt _roundIndex = 0.obs;
-  Round? get currentRound {
-    if (_rounds.length > _roundIndex.value) {
-      return _rounds[_roundIndex.value];
-    }
-    return null;
-  }
-
-  RoundResult? get currentRoundResult {
-    if (_roundsResults.length > _roundIndex.value) {
-      return _roundsResults[_roundIndex.value];
-    }
-    return null;
-  }
+  final Rx<GameState> _gameState = GameState(
+    isLoading: true,
+    roundIndex: 0,
+    roundStatus: RoundStatus.PLAYING,
+    rounds: List.empty(),
+    roundsResults: List.empty(),
+  ).obs;
+  GameState get gameState => _gameState.value;
 
   PlayViewModel({
     required this.gameCreatorUsecase,
@@ -40,30 +28,32 @@ class PlayViewModel extends GetxController {
   }
 
   void onAnswer(Breed breed) async {
-    _roundsResults.add(
-      RoundResult(
-        round: currentRound!,
-        answer: breed,
-      ),
+    _gameState.value = _gameState.value.copyWith(
+      roundStatus: RoundStatus.COMPLETED,
+      roundsResults: [
+        ..._gameState.value.roundsResults,
+        RoundResult(
+          round: _gameState.value.currentRound!,
+          answer: breed,
+        ),
+      ],
     );
-    _roundStatus.value = RoundStatus.COMPLETED;
 
+    // Wait for finish round animation before moving to next round
     await Future.delayed(const Duration(milliseconds: 300));
-    _isloading.value = true;
-    if (_roundIndex.value + 1 == _rounds.length) {
-      // TODO: navigate to finish screen
-
+    _gameState.value = _gameState.value.copyWith(isLoading: true);
+    if (_gameState.value.roundIndex + 1 == _gameState.value.rounds.length) {
+      Get.off(
+        () => GameResultScreen(gameResults: _gameState.value.roundsResults),
+      );
     } else {
       _nextRound();
-      _roundStatus.value = RoundStatus.PLAYING;
     }
-    _isloading.value = false;
   }
 
   void _startGame() async {
-    _isloading.value = true;
     await _createGame();
-    _isloading.value = false;
+    _gameState.value = _gameState.value.copyWith(isLoading: false);
   }
 
   Future _createGame() async {
@@ -72,10 +62,14 @@ class PlayViewModel extends GetxController {
       // TODO: show error;
       return;
     }
-    _rounds = result;
+    _gameState.value = _gameState.value.copyWith(rounds: result);
   }
 
   void _nextRound() {
-    _roundIndex.value = _roundIndex.value + 1;
+    _gameState.value = _gameState.value.copyWith(
+      roundIndex: _gameState.value.roundIndex + 1,
+      roundStatus: RoundStatus.PLAYING,
+      isLoading: false,
+    );
   }
 }

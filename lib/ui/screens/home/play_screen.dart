@@ -20,17 +20,18 @@ class PlayScreen extends StatelessWidget {
         centerTitle: true,
         elevation: 0,
         backgroundColor: themeData.colorScheme.background,
+        foregroundColor: themeData.colorScheme.onBackground,
       ),
       body: GetX<PlayViewModel>(
         init: _model,
         builder: (model) {
-          if (model.isLoading) {
+          if (model.gameState.isLoading) {
             return const Center(
               child: CircularProgressIndicator(),
             );
           }
-          if (model.currentRound != null) {
-            final round = model.currentRound!;
+          if (model.gameState.currentRound != null) {
+            final round = model.gameState.currentRound!;
             return Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: Dimens.MARGIN_S,
@@ -41,6 +42,7 @@ class PlayScreen extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
+                    const SizedBox(height: Dimens.MARGIN_M),
                     Expanded(
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(20),
@@ -52,7 +54,7 @@ class PlayScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: Dimens.MARGIN_L),
                     const Text(
-                      'What its breed?',
+                      'This dog this is a...',
                       style: TextStyle(
                         fontSize: 26,
                       ),
@@ -61,7 +63,8 @@ class PlayScreen extends StatelessWidget {
                     Expanded(
                       child: AnimatedSwitcher(
                         duration: const Duration(milliseconds: 250),
-                        child: model.roundStatus == RoundStatus.PLAYING
+                        child: model.gameState.roundStatus ==
+                                RoundStatus.PLAYING
                             ? AnswerButtons(
                                 key: const Key('AnswerButtons_success'),
                                 round: round,
@@ -71,7 +74,8 @@ class PlayScreen extends StatelessWidget {
                                 key: const Key('AnswerButtons_error'),
                                 round: round,
                                 onAnswer: model.onAnswer,
-                                answer: model.currentRoundResult?.answer,
+                                answer:
+                                    model.gameState.currentRoundResult?.answer,
                               ),
                       ),
                     ),
