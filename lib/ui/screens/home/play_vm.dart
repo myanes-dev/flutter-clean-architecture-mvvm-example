@@ -43,6 +43,8 @@ class PlayViewModel extends GetxController {
     await Future.delayed(const Duration(milliseconds: 300));
     _gameState.value = _gameState.value.copyWith(isLoading: true);
     if (_gameState.value.roundIndex + 1 == _gameState.value.rounds.length) {
+      // TODO: Send envent to Screen and launch navigation from there.
+      // Navigation from viewmodel is bad practice for testing.
       Get.off(
         () => GameResultScreen(gameResults: _gameState.value.roundsResults),
       );
