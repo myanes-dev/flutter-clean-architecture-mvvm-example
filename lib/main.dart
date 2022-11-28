@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_architecture_2022/ui/screens/home/play_screen.dart';
 import 'package:get/get.dart';
 import 'package:flutter_clean_architecture_2022/core/config/di.dart';
 import 'package:flutter_clean_architecture_2022/ui/const/themes.dart';
-import 'package:flutter_clean_architecture_2022/ui/screens/home/home_screen.dart';
 
 void main() async {
   await _init();
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       title: 'Dogs Care',
       theme: AppThemes.light,
       darkTheme: AppThemes.dark,
-      home: const HomeScreen(),
+      home: PlayScreen(),
     );
   }
 }
