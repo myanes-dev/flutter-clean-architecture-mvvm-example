@@ -18,6 +18,7 @@ class GameCreatorUsecase {
   Future<Result<List<Round>>> call({
     required int numOfRounds,
   }) async {
+    // All breeds
     final breedListResult = await breedListUsecase();
     if (!breedListResult.success) return Result(false);
 
@@ -30,24 +31,15 @@ class GameCreatorUsecase {
 
     // Fetch one random dog for each breed
     final List<Future<Result<Dog>>> futures = radomBreeds
-        .map(
-          (breed) => dogRandomBreedUsecase(breed: breed),
-        )
+        .map((breed) => dogRandomBreedUsecase(breed: breed))
         .toList();
-
     final dogsResults = await Future.wait(futures);
 
     final areAllSuccess = dogsResults.fold<bool>(
-      true,
-      (
-        previousValue,
-        element,
-      ) =>
-          previousValue && element.success,
-    );
-
+        true, (previousValue, element) => previousValue && element.success);
     if (!areAllSuccess) return Result(false);
 
+    // Rounds withs 4 answers for each dog
     final rounds = dogsResults.map(
       (e) {
         // Generate random answer for each dog
