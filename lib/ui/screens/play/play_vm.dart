@@ -28,11 +28,11 @@ class PlayViewModel extends GetxController {
 
   @override
   void onInit() {
-    _startGame();
+    startGame();
     super.onInit();
   }
 
-  void onAnswer(Breed breed) async {
+  Future onAnswer(Breed breed) async {
     _gameState.value = _gameState.value.copyWith(
       roundStatus: RoundStatus.COMPLETED,
       roundsResults: [
@@ -54,7 +54,7 @@ class PlayViewModel extends GetxController {
     }
   }
 
-  void _startGame() async {
+  Future startGame() async {
     await _createGame();
     _gameState.value = _gameState.value.copyWith(isLoading: false);
   }
