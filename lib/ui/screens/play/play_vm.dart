@@ -1,9 +1,12 @@
 import 'package:flutter_clean_architecture_2022/domain/models/breed.dart';
 import 'package:flutter_clean_architecture_2022/domain/models/round.dart';
 import 'package:flutter_clean_architecture_2022/domain/usecasaes/game_builder_usecase.dart';
-import 'package:flutter_clean_architecture_2022/ui/screens/game_result/game_result_screen.dart';
 import 'package:flutter_clean_architecture_2022/ui/screens/play/game_state.dart';
 import 'package:get/get.dart';
+
+enum PlayViewEvent {
+  navigateToResultPage,
+}
 
 class PlayViewModel extends GetxController {
   final GameCreatorUsecase gameCreatorUsecase;
@@ -16,6 +19,8 @@ class PlayViewModel extends GetxController {
     roundsResults: List.empty(),
   ).obs;
   GameState get gameState => _gameState.value;
+
+  final Rx<PlayViewEvent?> viewEvents = Rx(null);
 
   PlayViewModel({
     required this.gameCreatorUsecase,
@@ -43,11 +48,7 @@ class PlayViewModel extends GetxController {
     await Future.delayed(const Duration(milliseconds: 300));
     _gameState.value = _gameState.value.copyWith(isLoading: true);
     if (_gameState.value.roundIndex + 1 == _gameState.value.rounds.length) {
-      // TODO: Send envent to Screen and launch navigation from there.
-      // Navigation from viewmodel is bad practice for testing.
-      Get.off(
-        () => GameResultScreen(gameResults: _gameState.value.roundsResults),
-      );
+      viewEvents.call(PlayViewEvent.navigateToResultPage);
     } else {
       _nextRound();
     }

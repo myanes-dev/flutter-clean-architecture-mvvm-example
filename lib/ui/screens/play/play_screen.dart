@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture_2022/core/config/di.dart';
 import 'package:flutter_clean_architecture_2022/domain/models/round.dart';
 import 'package:flutter_clean_architecture_2022/ui/const/dimens.dart';
+import 'package:flutter_clean_architecture_2022/ui/screens/game_result/game_result_screen.dart';
 import 'package:flutter_clean_architecture_2022/ui/screens/play/play_vm.dart';
 import 'package:flutter_clean_architecture_2022/ui/widgets/answer_buttons.dart';
 import 'package:get/get.dart';
@@ -10,6 +11,19 @@ class PlayScreen extends StatelessWidget {
   PlayScreen({Key? key}) : super(key: key);
 
   final PlayViewModel _model = getIt();
+
+  PlayViewModel _init() {
+    ever(_model.viewEvents, (event) {
+      switch (event) {
+        case PlayViewEvent.navigateToResultPage:
+          _navigateToResultPage();
+          break;
+        default:
+      }
+    });
+
+    return _model;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +37,7 @@ class PlayScreen extends StatelessWidget {
         foregroundColor: themeData.colorScheme.onBackground,
       ),
       body: GetX<PlayViewModel>(
-        init: _model,
+        init: _init(),
         builder: (model) {
           if (model.gameState.isLoading) {
             return const Center(
@@ -90,6 +104,12 @@ class PlayScreen extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+
+  void _navigateToResultPage() {
+    Get.off(
+      () => GameResultScreen(gameResults: _model.gameState.roundsResults),
     );
   }
 }
