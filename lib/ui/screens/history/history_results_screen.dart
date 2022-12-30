@@ -35,12 +35,18 @@ class HistoryResultsScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            game.id,
+                          Expanded(
+                            child: Text(
+                              game.id,
+                            ),
                           ),
                           Text(
                             "${game.roundsOKcount.toString()}/${game.roundsCount}",
                           ),
+                          IconButton(
+                            onPressed: () => _bloc.onRemoveGameClick(game.id),
+                            icon: const Icon(Icons.delete_forever_rounded),
+                          )
                         ],
                       ),
                     ),

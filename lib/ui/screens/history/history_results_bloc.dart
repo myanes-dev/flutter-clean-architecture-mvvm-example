@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_clean_architecture_2022/domain/models/game_result.dart';
 import 'package:flutter_clean_architecture_2022/domain/usecasaes/game_history_usecase.dart';
+import 'package:flutter_clean_architecture_2022/domain/usecasaes/game_remove_usecase.dart';
 
 class HistoryResultsState {
   final bool isLoading;
@@ -23,9 +24,12 @@ class HistoryResultsState {
 
 class HistoryResultsBloc extends Cubit<HistoryResultsState> {
   final GameHistoryUseCase _gameHistoryUseCase;
+  final GameRemoveUseCase _gameRemoveUseCase;
 
-  HistoryResultsBloc(this._gameHistoryUseCase)
-      : super(HistoryResultsState(results: [])) {
+  HistoryResultsBloc(
+    this._gameHistoryUseCase,
+    this._gameRemoveUseCase,
+  ) : super(HistoryResultsState(results: [])) {
     _loadData();
   }
 
@@ -33,11 +37,17 @@ class HistoryResultsBloc extends Cubit<HistoryResultsState> {
     emit(state.copyWith(isLoading: true));
 
     final result = await _gameHistoryUseCase();
-
     // TODO: show errors
     emit(state.copyWith(
       isLoading: false,
       results: result.value ?? [],
     ));
+  }
+
+  onRemoveGameClick(String gameID) {
+    final list = state.results;
+    list.removeWhere((element) => element.id == gameID);
+    emit(state.copyWith(results: list));
+    _gameRemoveUseCase.call(gameID);
   }
 }
