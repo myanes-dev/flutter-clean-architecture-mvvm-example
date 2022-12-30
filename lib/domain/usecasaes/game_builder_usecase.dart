@@ -7,19 +7,19 @@ import 'package:flutter_clean_architecture_2022/domain/usecasaes/dog_random_bree
 import 'dart:math';
 
 class GameCreatorUsecase {
-  final BreedListUsecase breedListUsecase;
-  final DogRandomBreedUsecase dogRandomBreedUsecase;
+  final BreedListUsecase _breedListUsecase;
+  final DogRandomBreedUsecase _dogRandomBreedUsecase;
 
-  GameCreatorUsecase({
-    required this.breedListUsecase,
-    required this.dogRandomBreedUsecase,
-  });
+  GameCreatorUsecase(
+    this._breedListUsecase,
+    this._dogRandomBreedUsecase,
+  );
 
   Future<Result<List<Round>>> call({
     required int numOfRounds,
   }) async {
     // All breeds
-    final breedListResult = await breedListUsecase();
+    final breedListResult = await _breedListUsecase();
     if (!breedListResult.success) return Result(false);
 
     final List<Breed> breedList = breedListResult.value!;
@@ -31,7 +31,7 @@ class GameCreatorUsecase {
 
     // Fetch one random dog for each breed
     final List<Future<Result<Dog>>> futures = radomBreeds
-        .map((breed) => dogRandomBreedUsecase(breed: breed))
+        .map((breed) => _dogRandomBreedUsecase(breed: breed))
         .toList();
     final dogsResults = await Future.wait(futures);
 

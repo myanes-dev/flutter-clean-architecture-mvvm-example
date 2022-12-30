@@ -18,8 +18,8 @@ late final GameCreatorUsecase _gameCreator;
 void main() {
   setUpAll(() {
     _gameCreator = GameCreatorUsecase(
-      breedListUsecase: _breedListUsecase,
-      dogRandomBreedUsecase: _dogRandomBreedUsecase,
+      _breedListUsecase,
+      _dogRandomBreedUsecase,
     );
   });
 

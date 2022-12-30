@@ -1,6 +1,7 @@
 import 'package:flutter_clean_architecture_2022/domain/models/breed.dart';
 import 'package:flutter_clean_architecture_2022/domain/models/result.dart';
 import 'package:flutter_clean_architecture_2022/domain/usecasaes/game_builder_usecase.dart';
+import 'package:flutter_clean_architecture_2022/domain/usecasaes/game_save_usecase.dart';
 import 'package:flutter_clean_architecture_2022/ui/screens/play/play_vm.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
@@ -11,12 +12,17 @@ import 'play_vm_test.mocks.dart';
 
 @GenerateMocks([GameCreatorUsecase])
 final _gameCreator = MockGameCreatorUsecase();
+@GenerateMocks([GameSaveUseCase])
+final _gameSaver = MockGameSaveUseCase();
 
 late PlayViewModel _viewModel;
 
 void main() {
   setUp(() {
-    _viewModel = PlayViewModel(gameCreatorUsecase: _gameCreator);
+    _viewModel = PlayViewModel(
+      gameCreatorUsecase: _gameCreator,
+      gameSaveUseCase: _gameSaver,
+    );
   });
 
   tearDown(() {

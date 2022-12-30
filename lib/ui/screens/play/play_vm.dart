@@ -1,6 +1,8 @@
 import 'package:flutter_clean_architecture_2022/domain/models/breed.dart';
+import 'package:flutter_clean_architecture_2022/domain/models/game_result.dart';
 import 'package:flutter_clean_architecture_2022/domain/models/round.dart';
 import 'package:flutter_clean_architecture_2022/domain/usecasaes/game_builder_usecase.dart';
+import 'package:flutter_clean_architecture_2022/domain/usecasaes/game_save_usecase.dart';
 import 'package:flutter_clean_architecture_2022/ui/screens/play/game_state.dart';
 import 'package:get/get.dart';
 
@@ -9,7 +11,8 @@ enum PlayViewEvent {
 }
 
 class PlayViewModel extends GetxController {
-  final GameCreatorUsecase gameCreatorUsecase;
+  final GameCreatorUsecase _gameCreatorUsecase;
+  final GameSaveUseCase _gameSaveUseCase;
 
   final Rx<GameState> _gameState = GameState(
     isLoading: true,
@@ -23,8 +26,10 @@ class PlayViewModel extends GetxController {
   final Rx<PlayViewEvent?> viewEvents = Rx(null);
 
   PlayViewModel({
-    required this.gameCreatorUsecase,
-  });
+    required GameCreatorUsecase gameCreatorUsecase,
+    required GameSaveUseCase gameSaveUseCase,
+  })  : _gameCreatorUsecase = gameCreatorUsecase,
+        _gameSaveUseCase = gameSaveUseCase;
 
   @override
   void onInit() {
@@ -44,10 +49,12 @@ class PlayViewModel extends GetxController {
       ],
     );
 
+    // TODO: Remove this hack, viewModel should not know about animations or ui implementations
     // Wait for finish round animation before moving to next round
     await Future.delayed(const Duration(milliseconds: 300));
     _gameState.value = _gameState.value.copyWith(isLoading: true);
     if (_gameState.value.roundIndex + 1 == _gameState.value.rounds.length) {
+      _saveGame();
       viewEvents.call(PlayViewEvent.navigateToResultPage);
     } else {
       _nextRound();
@@ -60,12 +67,19 @@ class PlayViewModel extends GetxController {
   }
 
   Future _createGame() async {
-    final result = await gameCreatorUsecase(numOfRounds: 2);
+    final result = await _gameCreatorUsecase(numOfRounds: 2);
     if (!result.success) {
       // TODO: show error;
       return;
     }
     _gameState.value = _gameState.value.copyWith(rounds: result.value);
+  }
+
+  _saveGame() {
+    _gameSaveUseCase.call(GameResult(
+      date: DateTime.now(),
+      results: gameState.roundsResults,
+    ));
   }
 
   void _nextRound() {

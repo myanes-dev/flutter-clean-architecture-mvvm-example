@@ -44,7 +44,6 @@ class GameResultScreen extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                print('TODO: start new game');
                 Get.off(
                   () => PlayScreen(),
                 );

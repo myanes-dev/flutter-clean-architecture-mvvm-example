@@ -3,18 +3,18 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i6;
+import 'dart:async' as _i4;
 
-import 'package:flutter_clean_architecture_2022/domain/models/result.dart'
-    as _i4;
-import 'package:flutter_clean_architecture_2022/domain/models/round.dart'
+import 'package:flutter_clean_architecture_2022/domain/models/game_result.dart'
     as _i7;
-import 'package:flutter_clean_architecture_2022/domain/usecasaes/breed_list_usecase.dart'
+import 'package:flutter_clean_architecture_2022/domain/models/result.dart'
     as _i2;
-import 'package:flutter_clean_architecture_2022/domain/usecasaes/dog_random_breed_usecase.dart'
-    as _i3;
-import 'package:flutter_clean_architecture_2022/domain/usecasaes/game_builder_usecase.dart'
+import 'package:flutter_clean_architecture_2022/domain/models/round.dart'
     as _i5;
+import 'package:flutter_clean_architecture_2022/domain/usecasaes/game_builder_usecase.dart'
+    as _i3;
+import 'package:flutter_clean_architecture_2022/domain/usecasaes/game_save_usecase.dart'
+    as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 
 // ignore_for_file: type=lint
@@ -28,30 +28,8 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
 
-class _FakeBreedListUsecase_0 extends _i1.SmartFake
-    implements _i2.BreedListUsecase {
-  _FakeBreedListUsecase_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeDogRandomBreedUsecase_1 extends _i1.SmartFake
-    implements _i3.DogRandomBreedUsecase {
-  _FakeDogRandomBreedUsecase_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
-}
-
-class _FakeResult_2<T> extends _i1.SmartFake implements _i4.Result<T> {
-  _FakeResult_2(
+class _FakeResult_0<T> extends _i1.SmartFake implements _i2.Result<T> {
+  _FakeResult_0(
     Object parent,
     Invocation parentInvocation,
   ) : super(
@@ -64,37 +42,21 @@ class _FakeResult_2<T> extends _i1.SmartFake implements _i4.Result<T> {
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockGameCreatorUsecase extends _i1.Mock
-    implements _i5.GameCreatorUsecase {
+    implements _i3.GameCreatorUsecase {
   MockGameCreatorUsecase() {
     _i1.throwOnMissingStub(this);
   }
 
   @override
-  _i2.BreedListUsecase get breedListUsecase => (super.noSuchMethod(
-        Invocation.getter(#breedListUsecase),
-        returnValue: _FakeBreedListUsecase_0(
-          this,
-          Invocation.getter(#breedListUsecase),
-        ),
-      ) as _i2.BreedListUsecase);
-  @override
-  _i3.DogRandomBreedUsecase get dogRandomBreedUsecase => (super.noSuchMethod(
-        Invocation.getter(#dogRandomBreedUsecase),
-        returnValue: _FakeDogRandomBreedUsecase_1(
-          this,
-          Invocation.getter(#dogRandomBreedUsecase),
-        ),
-      ) as _i3.DogRandomBreedUsecase);
-  @override
-  _i6.Future<_i4.Result<List<_i7.Round>>> call({required int? numOfRounds}) =>
+  _i4.Future<_i2.Result<List<_i5.Round>>> call({required int? numOfRounds}) =>
       (super.noSuchMethod(
         Invocation.method(
           #call,
           [],
           {#numOfRounds: numOfRounds},
         ),
-        returnValue: _i6.Future<_i4.Result<List<_i7.Round>>>.value(
-            _FakeResult_2<List<_i7.Round>>(
+        returnValue: _i4.Future<_i2.Result<List<_i5.Round>>>.value(
+            _FakeResult_0<List<_i5.Round>>(
           this,
           Invocation.method(
             #call,
@@ -102,5 +64,31 @@ class MockGameCreatorUsecase extends _i1.Mock
             {#numOfRounds: numOfRounds},
           ),
         )),
-      ) as _i6.Future<_i4.Result<List<_i7.Round>>>);
+      ) as _i4.Future<_i2.Result<List<_i5.Round>>>);
+}
+
+/// A class which mocks [GameSaveUseCase].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockGameSaveUseCase extends _i1.Mock implements _i6.GameSaveUseCase {
+  MockGameSaveUseCase() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i4.Future<_i2.Result<dynamic>> call(_i7.GameResult? game) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #call,
+          [game],
+        ),
+        returnValue:
+            _i4.Future<_i2.Result<dynamic>>.value(_FakeResult_0<dynamic>(
+          this,
+          Invocation.method(
+            #call,
+            [game],
+          ),
+        )),
+      ) as _i4.Future<_i2.Result<dynamic>>);
 }

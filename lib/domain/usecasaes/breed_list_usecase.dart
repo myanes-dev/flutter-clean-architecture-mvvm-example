@@ -4,10 +4,10 @@ import 'package:flutter_clean_architecture_2022/domain/repository/dog_repository
 import '../models/breed.dart';
 
 class BreedListUsecase {
-  final DogRespository dogRespository;
-  BreedListUsecase({
-    required this.dogRespository,
-  });
+  final DogRespository _dogRespository;
+  BreedListUsecase(
+    this._dogRespository,
+  );
 
-  Future<Result<List<Breed>>> call() => dogRespository.allBreeds();
+  Future<Result<List<Breed>>> call() => _dogRespository.allBreeds();
 }
