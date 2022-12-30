@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_architecture_2022/ui/screens/home_menu/home_menu_screen.dart';
 import 'package:flutter_clean_architecture_2022/ui/screens/play/play_screen.dart';
 import 'package:get/get.dart';
 import 'package:flutter_clean_architecture_2022/core/config/di.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       title: 'Dogs Games',
       theme: AppThemes.light,
       darkTheme: AppThemes.dark,
-      home: PlayScreen(),
+      home: const HomeMenuScreen(),
     );
   }
 }
