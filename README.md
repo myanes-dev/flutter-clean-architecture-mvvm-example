@@ -23,12 +23,12 @@ Sample app with implementation of every layer of my aproach to Clean Architectur
 > - Translated Strings -> i18n
 > - Offline mode (Access to results history from local Data source)
 > - More robust error handling
-> - State Managment examples with [bloc](https://pub.dev/packages/flutter_bloc)
+> - More complex state management examples with [bloc](https://pub.dev/packages/flutter_bloc)
 > - Custom App Icon + Splash screen
 
 ## Libraries 📦
 - Dendency Injection with [get_it](https://pub.dev/packages/get_it)
-- State Management with [getX](https://pub.dev/packages/get)
+- State Management with [getX](https://pub.dev/packages/get) & [bloc](https://pub.dev/packages/flutter_bloc)
 - Tesiting with [mockito](https://pub.dev/packages/mockito)
 - Neteworking with [http](https://pub.dev/packages/http)
 
@@ -37,6 +37,7 @@ Sample app with implementation of every layer of my aproach to Clean Architectur
 - **Play Screen**. Two rouds where you can guess the breed of a random dog by looking at it's picture.
 Data comes from Dog CEO: https://dog.ceo/dog-api/
 - **Results Scren**. It shows correct answers count and a replay button.
+- **Results history** saved in memory (data is lost when app is closed)
 
 > **Comming soon**:
 > - **Results history** saved locally
