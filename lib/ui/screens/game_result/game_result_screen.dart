@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture_2022/domain/models/round.dart';
 import 'package:flutter_clean_architecture_2022/ui/const/dimens.dart';
+import 'package:flutter_clean_architecture_2022/ui/screens/home_menu/home_menu_screen.dart';
 import 'package:flutter_clean_architecture_2022/ui/screens/play/play_screen.dart';
 import 'package:get/get.dart';
 
@@ -36,18 +37,38 @@ class GameResultScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: Dimens.MARGIN_XL),
-            CupertinoButton.filled(
-              child: const Text(
-                'PLAY AGAIN!',
-                style: TextStyle(
-                  fontWeight: FontWeight.w500,
+            SizedBox(
+              width: double.infinity,
+              child: CupertinoButton.filled(
+                child: const Text(
+                  'PLAY AGAIN!',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
+                onPressed: () {
+                  Get.off(
+                    () => PlayScreen(),
+                  );
+                },
               ),
-              onPressed: () {
-                Get.off(
-                  () => PlayScreen(),
-                );
-              },
+            ),
+            const SizedBox(height: Dimens.MARGIN_M),
+            SizedBox(
+              width: double.infinity,
+              child: CupertinoButton.filled(
+                child: const Text(
+                  'BACK TO MENU',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                onPressed: () {
+                  Get.off(
+                    () => const HomeMenuScreen(),
+                  );
+                },
+              ),
             ),
           ],
         ),
