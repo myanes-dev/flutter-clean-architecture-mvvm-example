@@ -29,11 +29,9 @@ class HistoryResultsBloc extends Cubit<HistoryResultsState> {
   HistoryResultsBloc(
     this._gameHistoryUseCase,
     this._gameRemoveUseCase,
-  ) : super(HistoryResultsState(results: [])) {
-    _loadData();
-  }
+  ) : super(HistoryResultsState(results: []));
 
-  void _loadData() async {
+  loadData() async {
     emit(state.copyWith(isLoading: true));
 
     final result = await _gameHistoryUseCase();

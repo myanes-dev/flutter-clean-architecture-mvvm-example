@@ -11,6 +11,7 @@ class HistoryResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _bloc.loadData();
     return Scaffold(
       appBar: AppBar(title: const Text('History Results')),
       body: BlocBuilder<HistoryResultsBloc, HistoryResultsState>(
