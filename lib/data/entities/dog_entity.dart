@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 
 part 'dog_entity.g.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 1)
 class DogEntity extends HiveObject {
   DogEntity({
     required this.id,

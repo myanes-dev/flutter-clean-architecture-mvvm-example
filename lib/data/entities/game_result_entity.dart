@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 
 part 'game_result_entity.g.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 4)
 class GameResultEntity extends HiveObject {
   GameResultEntity({
     required this.id,

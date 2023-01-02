@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 
 part 'round_entity.g.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 2)
 class RoundEntity {
   RoundEntity({
     required this.dog,
@@ -18,7 +18,7 @@ class RoundEntity {
   List<BreedEntity> answers;
 }
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 3)
 class RoundResultEntity {
   RoundResultEntity({
     required this.round,

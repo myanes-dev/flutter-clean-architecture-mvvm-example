@@ -8,7 +8,7 @@ part of 'game_result_entity.dart';
 
 class GameResultEntityAdapter extends TypeAdapter<GameResultEntity> {
   @override
-  final int typeId = 0;
+  final int typeId = 4;
 
   @override
   GameResultEntity read(BinaryReader reader) {

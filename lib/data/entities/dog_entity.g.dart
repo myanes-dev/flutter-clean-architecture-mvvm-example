@@ -8,7 +8,7 @@ part of 'dog_entity.dart';
 
 class DogEntityAdapter extends TypeAdapter<DogEntity> {
   @override
-  final int typeId = 0;
+  final int typeId = 1;
 
   @override
   DogEntity read(BinaryReader reader) {

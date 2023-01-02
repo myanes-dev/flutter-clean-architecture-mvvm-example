@@ -8,7 +8,7 @@ part of 'round_entity.dart';
 
 class RoundEntityAdapter extends TypeAdapter<RoundEntity> {
   @override
-  final int typeId = 0;
+  final int typeId = 2;
 
   @override
   RoundEntity read(BinaryReader reader) {
@@ -45,7 +45,7 @@ class RoundEntityAdapter extends TypeAdapter<RoundEntity> {
 
 class RoundResultEntityAdapter extends TypeAdapter<RoundResultEntity> {
   @override
-  final int typeId = 0;
+  final int typeId = 3;
 
   @override
   RoundResultEntity read(BinaryReader reader) {
