@@ -15,13 +15,13 @@ Sample app with implementation of every layer of my aproach to Clean Architectur
 - Use cases
 - Repository pattern
 - Networking: Http + Json decode
+- Offline mode: Local database
 - Theme: Light & Dark (from system settings)
 - Basic Error Handling
 - Testing: Widgets + Unit tests
 
 > **Comming soon**:
 > - Translated Strings -> i18n
-> - Offline mode (Access to results history from local Data source)
 > - More robust error handling
 > - More complex state management examples with [bloc](https://pub.dev/packages/flutter_bloc)
 > - Custom App Icon + Splash screen
@@ -31,16 +31,14 @@ Sample app with implementation of every layer of my aproach to Clean Architectur
 - State Management with [getX](https://pub.dev/packages/get) & [bloc](https://pub.dev/packages/flutter_bloc)
 - Tesiting with [mockito](https://pub.dev/packages/mockito)
 - Neteworking with [http](https://pub.dev/packages/http)
+- Local database with [hive](https://pub.dev/packages/hive)
 
 ## App Features 📋
 
 - **Play Screen**. Two rouds where you can guess the breed of a random dog by looking at it's picture.
 Data comes from Dog CEO: https://dog.ceo/dog-api/
 - **Results Scren**. It shows correct answers count and a replay button.
-- **Results history** saved in memory (data is lost when app is closed)
-
-> **Comming soon**:
-> - **Results history** saved locally
+- **Results history** saved in local database
 
 
 ## Testing ⚙️
