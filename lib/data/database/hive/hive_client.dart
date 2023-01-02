@@ -3,11 +3,9 @@ import 'package:flutter_clean_architecture_2022/data/entities/breed_entity.dart'
 import 'package:flutter_clean_architecture_2022/data/entities/dog_entity.dart';
 import 'package:flutter_clean_architecture_2022/data/entities/game_result_entity.dart';
 import 'package:flutter_clean_architecture_2022/data/entities/round_entity.dart';
-import 'package:flutter_clean_architecture_2022/data/mappers/breed_mapper.dart';
-import 'package:flutter_clean_architecture_2022/data/mappers/round_mapper.dart';
+import 'package:flutter_clean_architecture_2022/data/mappers/game_result.mapper.dart';
 import 'package:flutter_clean_architecture_2022/domain/models/result.dart';
 import 'package:flutter_clean_architecture_2022/domain/models/game_result.dart';
-import 'package:flutter_clean_architecture_2022/domain/models/round.dart';
 import 'package:hive/hive.dart';
 
 initHiveAdapters() {
@@ -27,15 +25,7 @@ class HiveClient implements GameDB {
 
     final results = box.values
         .map(
-          (e) => GameResult(
-            date: e.date,
-            results: e.results
-                .map((e) => RoundResult(
-                      round: RoundMapper.toDomainFromEntity(e.round),
-                      answer: BreedMapper.toDomainFromEntity(e.answer),
-                    ))
-                .toList(),
-          ),
+          (e) => GameResultMapper.toDomainFromEntity(e),
         )
         .toList();
     await box.close();
@@ -54,15 +44,7 @@ class HiveClient implements GameDB {
   @override
   Future save(GameResult game) async {
     final box = await Hive.openBox<GameResultEntity>(_games_box);
-    final gameEntity = GameResultEntity(
-        id: game.id,
-        date: game.date,
-        results: game.results
-            .map((e) => RoundResultEntity(
-                  round: RoundMapper.fromDomainToEntity(e.round),
-                  answer: BreedMapper.fromDomainToEntity(e.answer),
-                ))
-            .toList());
+    final gameEntity = GameResultMapper.fromDomainToEntity(game);
     await box.put(game.id, gameEntity);
     await box.close();
     return;
