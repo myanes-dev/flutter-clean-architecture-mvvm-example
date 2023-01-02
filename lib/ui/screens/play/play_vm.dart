@@ -17,7 +17,6 @@ class PlayViewModel extends GetxController {
   final Rx<GameState> _gameState = GameState(
     isLoading: true,
     roundIndex: 0,
-    roundStatus: RoundStatus.PLAYING,
     rounds: List.empty(),
     roundsResults: List.empty(),
   ).obs;
@@ -39,7 +38,7 @@ class PlayViewModel extends GetxController {
 
   Future onAnswer(Breed breed) async {
     _gameState.value = _gameState.value.copyWith(
-      roundStatus: RoundStatus.COMPLETED,
+      isLoading: true,
       roundsResults: [
         ..._gameState.value.roundsResults,
         RoundResult(
@@ -49,15 +48,11 @@ class PlayViewModel extends GetxController {
       ],
     );
 
-    // TODO: Remove this hack, viewModel should not know about animations or ui implementations
-    // Wait for finish round animation before moving to next round
-    await Future.delayed(const Duration(milliseconds: 300));
-    _gameState.value = _gameState.value.copyWith(isLoading: true);
     if (_gameState.value.roundIndex + 1 == _gameState.value.rounds.length) {
-      _saveGame();
+      await _saveGame();
       viewEvents.call(PlayViewEvent.navigateToResultPage);
     } else {
-      _nextRound();
+      await _nextRound();
     }
   }
 
@@ -75,17 +70,21 @@ class PlayViewModel extends GetxController {
     _gameState.value = _gameState.value.copyWith(rounds: result.value);
   }
 
-  _saveGame() {
+  Future<void> _saveGame() async {
+    // Delay between rounds
+    await Future.delayed(const Duration(milliseconds: 300));
     _gameSaveUseCase.call(GameResult(
       date: DateTime.now(),
       results: gameState.roundsResults,
     ));
   }
 
-  void _nextRound() {
+  Future<void> _nextRound() async {
+    // Delay between rounds
+    await Future.delayed(const Duration(milliseconds: 300));
+
     _gameState.value = _gameState.value.copyWith(
       roundIndex: _gameState.value.roundIndex + 1,
-      roundStatus: RoundStatus.PLAYING,
       isLoading: false,
     );
   }

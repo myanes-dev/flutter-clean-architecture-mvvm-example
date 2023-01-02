@@ -96,6 +96,12 @@ void main() {
       ),
     );
 
+    when(_gameSaver.call(any)).thenAnswer(
+      (realInvocation) async => Result(
+        true,
+      ),
+    );
+
     await _viewModel.startGame();
     await _viewModel.onAnswer(Breed(name: "name"));
     await _viewModel.onAnswer(Breed(name: "name"));

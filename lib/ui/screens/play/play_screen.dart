@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture_2022/core/config/di.dart';
-import 'package:flutter_clean_architecture_2022/domain/models/round.dart';
 import 'package:flutter_clean_architecture_2022/ui/const/dimens.dart';
 import 'package:flutter_clean_architecture_2022/ui/screens/game_result/game_result_screen.dart';
 import 'package:flutter_clean_architecture_2022/ui/screens/play/play_vm.dart';
@@ -75,22 +74,9 @@ class PlayScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: Dimens.MARGIN_M),
                     Expanded(
-                      child: AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 250),
-                        child: model.gameState.roundStatus ==
-                                RoundStatus.PLAYING
-                            ? AnswerButtons(
-                                key: const Key('AnswerButtons_success'),
-                                round: round,
-                                onAnswer: model.onAnswer,
-                              )
-                            : AnswerButtons(
-                                key: const Key('AnswerButtons_error'),
-                                round: round,
-                                onAnswer: model.onAnswer,
-                                answer:
-                                    model.gameState.currentRoundResult?.answer,
-                              ),
+                      child: AnswerButtons(
+                        round: round,
+                        onAnswer: model.onAnswer,
                       ),
                     ),
                     const SizedBox(height: Dimens.MARGIN_M),
