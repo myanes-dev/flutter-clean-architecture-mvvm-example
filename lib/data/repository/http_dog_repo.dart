@@ -42,7 +42,12 @@ class HttpDogRepo implements DogRespository {
       final Map<String, dynamic> json =
           jsonDecode(response.body) as Map<String, dynamic>;
 
-      return Result(true, value: DogDto(url: json['message']).toDomain());
+      return Result(
+        true,
+        value: DogMapper.toDomainFromDto(
+          DogDto(url: json['message']),
+        ),
+      );
     } catch (e) {
       return Result(false);
     }

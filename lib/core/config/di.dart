@@ -1,3 +1,4 @@
+import 'package:flutter_clean_architecture_2022/data/database/hive/hive_client.dart';
 import 'package:flutter_clean_architecture_2022/data/network/http_servie.dart';
 import 'package:flutter_clean_architecture_2022/data/repository/http_dog_repo.dart';
 import 'package:flutter_clean_architecture_2022/data/repository/local_game_repo.dart';
@@ -24,10 +25,13 @@ void initializeDI() {
 void _data() {
   // Services
   getIt.registerSingleton<HttpService>(HttpService());
+  getIt.registerLazySingleton<HiveClient>(() => HiveClient());
 
   // Repository
   getIt.registerSingleton<DogRespository>(HttpDogRepo(apiService: getIt()));
-  getIt.registerSingleton<GameRespository>(LocalGameRepo());
+  getIt.registerLazySingleton<GameRespository>(
+    () => LocalGameRepo(getIt<HiveClient>()),
+  );
 }
 
 void _domain() {
