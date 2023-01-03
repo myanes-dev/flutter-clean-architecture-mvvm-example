@@ -1,7 +1,7 @@
 # DOGS GAMES
 ![Alt text](docs/screenshots.png)
 # Flutter Clean Architecture Example by [myanes](https://github.com/myanes-dev)
-Sample app with implementation of every layer of my aproach to Clean Architecture for **Flutter**:
+Sample app with implementation of every layer of my approach to Clean Architecture for **Flutter**:
 
 ![Alt text](docs/architecture.png)
 ## Presentation <-> Domain <-> Data
@@ -16,22 +16,24 @@ Sample app with implementation of every layer of my aproach to Clean Architectur
 - Repository pattern
 - Networking: Http + Json decode
 - Offline mode: Local database
+- Simple custom Router
 - Theme: Light & Dark (from system settings)
 - Basic Error Handling
 - Testing: Widgets + Unit tests
+
+## Libraries 📦
+- Dendency Injection with [get_it](https://pub.dev/packages/get_it)
+- State Management with [getX](https://pub.dev/packages/get) & [bloc(cubit)](https://pub.dev/packages/flutter_bloc)
+- Tesiting with [mockito](https://pub.dev/packages/mockito)
+- Networking with [http](https://pub.dev/packages/http)
+- Local database with [hive](https://pub.dev/packages/hive)
+
 
 > **Comming soon**:
 > - Translated Strings -> i18n
 > - More robust error handling
 > - More complex state management examples with [bloc](https://pub.dev/packages/flutter_bloc)
 > - Custom App Icon + Splash screen
-
-## Libraries 📦
-- Dendency Injection with [get_it](https://pub.dev/packages/get_it)
-- State Management with [getX](https://pub.dev/packages/get) & [bloc](https://pub.dev/packages/flutter_bloc)
-- Tesiting with [mockito](https://pub.dev/packages/mockito)
-- Neteworking with [http](https://pub.dev/packages/http)
-- Local database with [hive](https://pub.dev/packages/hive)
 
 ## App Features 📋
 

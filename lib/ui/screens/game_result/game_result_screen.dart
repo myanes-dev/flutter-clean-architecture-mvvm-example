@@ -1,17 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_architecture_2022/core/config/di.dart';
 import 'package:flutter_clean_architecture_2022/domain/models/round.dart';
 import 'package:flutter_clean_architecture_2022/ui/const/dimens.dart';
-import 'package:flutter_clean_architecture_2022/ui/screens/home_menu/home_menu_screen.dart';
-import 'package:flutter_clean_architecture_2022/ui/screens/play/play_screen.dart';
-import 'package:get/get.dart';
+import 'package:flutter_clean_architecture_2022/ui/router/router.dart';
 
 class GameResultScreen extends StatelessWidget {
-  const GameResultScreen({
+  GameResultScreen({
     Key? key,
     required this.gameResults,
-  }) : super(key: key);
+    AppRouter? router,
+  })  : _router = router ?? getIt(),
+        super(key: key);
 
+  final AppRouter _router;
   final List<RoundResult> gameResults;
 
   @override
@@ -47,9 +49,7 @@ class GameResultScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  Get.off(
-                    () => PlayScreen(),
-                  );
+                  _router.replace(context, AppRoute.play());
                 },
               ),
             ),
@@ -64,9 +64,7 @@ class GameResultScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                  Get.off(
-                    () => const HomeMenuScreen(),
-                  );
+                  _router.backHome(context);
                 },
               ),
             ),

@@ -10,6 +10,7 @@ import 'package:flutter_clean_architecture_2022/domain/usecasaes/game_builder_us
 import 'package:flutter_clean_architecture_2022/domain/usecasaes/game_history_usecase.dart';
 import 'package:flutter_clean_architecture_2022/domain/usecasaes/game_remove_usecase.dart';
 import 'package:flutter_clean_architecture_2022/domain/usecasaes/game_save_usecase.dart';
+import 'package:flutter_clean_architecture_2022/ui/router/router.dart';
 import 'package:flutter_clean_architecture_2022/ui/screens/history/history_results_bloc.dart';
 import 'package:flutter_clean_architecture_2022/ui/screens/play/play_vm.dart';
 import 'package:get_it/get_it.dart';
@@ -70,6 +71,8 @@ void _domain() {
 }
 
 void _view() {
+  // Router
+  getIt.registerSingleton<AppRouter>(AppRouter());
   // ViewModels
   getIt.registerFactory<PlayViewModel>(
     () => PlayViewModel(

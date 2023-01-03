@@ -1,12 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_clean_architecture_2022/core/config/di.dart';
 import 'package:flutter_clean_architecture_2022/ui/const/dimens.dart';
-import 'package:flutter_clean_architecture_2022/ui/screens/history/history_results_screen.dart';
-import 'package:flutter_clean_architecture_2022/ui/screens/play/play_screen.dart';
-import 'package:get/get.dart';
+import 'package:flutter_clean_architecture_2022/ui/router/router.dart';
 
 class HomeMenuScreen extends StatelessWidget {
-  const HomeMenuScreen({Key? key}) : super(key: key);
+  HomeMenuScreen({
+    Key? key,
+    AppRouter? router,
+  })  : _router = router ?? getIt(),
+        super(key: key);
+
+  final AppRouter _router;
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +32,7 @@ class HomeMenuScreen extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    Get.to(
-                      () => PlayScreen(),
-                    );
+                    _router.to(context, AppRoute.play());
                   },
                 ),
               ),
@@ -44,9 +47,7 @@ class HomeMenuScreen extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    Get.to(
-                      () => HistoryResultsScreen(),
-                    );
+                    _router.to(context, AppRoute.historyResults());
                   },
                 ),
               ),

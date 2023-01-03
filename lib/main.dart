@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       title: 'Dogs Games',
       theme: AppThemes.light,
       darkTheme: AppThemes.dark,
-      home: const HomeMenuScreen(),
+      home: HomeMenuScreen(),
     );
   }
 }
