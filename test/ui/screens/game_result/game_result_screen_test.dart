@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_clean_architecture_2022/domain/models/breed.dart';
 import 'package:flutter_clean_architecture_2022/domain/models/dog.dart';
 import 'package:flutter_clean_architecture_2022/domain/models/round.dart';
+import 'package:flutter_clean_architecture_2022/ui/router/router.dart';
 import 'package:flutter_clean_architecture_2022/ui/screens/game_result/game_result_screen.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -12,6 +13,7 @@ void main() {
     await tester.pumpWidget(
       TestUtils.createWidgetForTesting(
         child: GameResultScreen(
+          router: AppRouter(),
           gameResults: [
             RoundResult(
               round: Round(
@@ -46,8 +48,9 @@ void main() {
   testWidgets('should show PLAY AGAIN! button', (tester) async {
     await tester.pumpWidget(
       TestUtils.createWidgetForTesting(
-        child: const GameResultScreen(
-          gameResults: [],
+        child: GameResultScreen(
+          router: AppRouter(),
+          gameResults: const [],
         ),
       ),
     );
